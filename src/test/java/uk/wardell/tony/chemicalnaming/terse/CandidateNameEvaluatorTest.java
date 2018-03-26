@@ -1,7 +1,4 @@
-package uk.wardell.tony.core.strategy;
-
-import uk.wardell.tony.boundary.out.NamingResult;
-import uk.wardell.tony.model.CandidateName;
+package uk.wardell.tony.chemicalnaming.terse;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;

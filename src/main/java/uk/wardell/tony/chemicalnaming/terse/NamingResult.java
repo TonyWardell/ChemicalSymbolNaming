@@ -1,4 +1,4 @@
-package uk.wardell.tony.boundary.out;
+package uk.wardell.tony.chemicalnaming.terse;
 
 public class NamingResult {
     final boolean result;

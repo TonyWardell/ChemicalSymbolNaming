@@ -1,4 +1,4 @@
-package uk.wardell.tony.boundary;
+package uk.wardell.tony;
 
 public class Main {
 

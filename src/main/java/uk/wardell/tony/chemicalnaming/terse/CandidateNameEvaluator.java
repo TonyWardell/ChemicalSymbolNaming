@@ -1,10 +1,8 @@
-package uk.wardell.tony.core.strategy;
-
-import uk.wardell.tony.boundary.out.NamingResult;
-import uk.wardell.tony.model.CandidateName;
+package uk.wardell.tony.chemicalnaming.terse;
 
 
 public class CandidateNameEvaluator {
+
 
     NamingResult evaluate(CandidateName candidateName) {
 

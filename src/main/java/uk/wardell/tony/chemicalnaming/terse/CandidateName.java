@@ -1,4 +1,4 @@
-package uk.wardell.tony.model;
+package uk.wardell.tony.chemicalnaming.terse;
 
 public class CandidateName {
     public final String name;
