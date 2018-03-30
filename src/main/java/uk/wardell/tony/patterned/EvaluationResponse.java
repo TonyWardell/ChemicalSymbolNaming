@@ -1,12 +1,21 @@
 package uk.wardell.tony.patterned;
 
 public class EvaluationResponse {
-    final boolean validity;
-    final String description;
+    public final boolean isValid;
+    public final String description;
 
-    public EvaluationResponse(boolean validity, String description) {
-        this.validity = validity;
+    public static EvaluationResponse VALID = new EvaluationResponse(true, "VALID");
+
+    public EvaluationResponse(boolean isValid, String description) {
+        this.isValid = isValid;
         this.description = description;
     }
 
+    @Override
+    public String toString() {
+        return "EvaluationResponse{" +
+                "isValid=" + isValid +
+                ", description='" + description + '\'' +
+                '}';
+    }
 }
