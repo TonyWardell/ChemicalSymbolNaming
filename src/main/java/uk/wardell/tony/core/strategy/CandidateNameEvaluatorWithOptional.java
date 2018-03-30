@@ -1,9 +1,10 @@
 package uk.wardell.tony.core.strategy;
 
 import java.util.Optional;
-import uk.wardell.tony.boundary.out.NamingResult;
+
+import uk.wardell.tony.chemicalnaming.terse.CandidateName;
+import uk.wardell.tony.chemicalnaming.terse.NamingResult;
 import uk.wardell.tony.logic.Finder;
-import uk.wardell.tony.model.CandidateName;
 
 public class CandidateNameEvaluatorWithOptional {
 
