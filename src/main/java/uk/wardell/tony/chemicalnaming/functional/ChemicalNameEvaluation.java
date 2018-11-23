@@ -7,16 +7,6 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 
 public class ChemicalNameEvaluation implements Evaluation {
-
-//    public static Function<CandidateName, EvaluationResponse> create(Predicate predicate,
-//                                                                     Supplier<EvaluationResponse> success,
-//                                                                     Supplier<EvaluationResponse> failure){
-//
-//        return candidateName -> predicate.test(candidateName) ? success.get() : failure.get();
-//    }
-
-
-
     public static Function<CandidateName, EvaluationResponse> create(Predicate predicate,
                                                                      EvaluationResponse success,
                                                                      EvaluationResponse failure){
