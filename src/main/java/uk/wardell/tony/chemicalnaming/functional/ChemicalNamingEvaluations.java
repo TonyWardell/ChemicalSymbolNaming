@@ -11,27 +11,24 @@ import static uk.wardell.tony.patterned.EvaluationResponse.VALID;
 
 public class ChemicalNamingEvaluations {
 
-
     //tests
     static final Predicate<CandidateName> doesSymbolContainTwoLetters() {
         return candidateName -> candidateName.symbol.length() == 2;
     }
 
-
     private static Predicate<CandidateName> ifSymbolNameIsTwoOfTheSameLetterThenNameShouldHaveThatLetterTwice() {
         return candidateName -> {
-            char c1 = candidateName.symbol.charAt(0);
-            char c2 = candidateName.symbol.charAt(1);
-            if(c1 != c2) return true;
+            char c0 = candidateName.symbol.charAt(0);
+            char c1 = candidateName.symbol.charAt(1);
+            char low0 = Character.toLowerCase(c0);
+            char low1 = Character.toLowerCase(c1);
+            if(low0 != low1) return true;
 
-            //Symbol is 2 of the same letter continue;
-            for (int i = 0; i < candidateName.element.length() - 1; i++) {
-                char elementUnderInspection = candidateName.element.charAt(i);
-                if (candidateName.element.substring(i + 1).contains("" + elementUnderInspection)) {
-                    return candidateName.symbol.equals(elementUnderInspection + "" + elementUnderInspection);
-                }
-            }
-            return false;
+            //Characters are the same
+            String lower = candidateName.element.toLowerCase();
+            int loc0 = lower.indexOf(low0);
+            int loc1 = lower.lastIndexOf(low1);
+            return loc0 != loc1;
         };
     }
 
@@ -43,7 +40,6 @@ public class ChemicalNamingEvaluations {
                     .element.toLowerCase().contains(("" + c2)));
         };
     }
-
 
     private static Predicate<CandidateName> areTheLettersInElementOrder() {
         return candidateName -> {
@@ -71,6 +67,20 @@ public class ChemicalNamingEvaluations {
         };
     }
 
+    private static Predicate<CandidateName> isFirstCharacterInUpperCase(){
+        return candidateName -> {
+            char c0 = candidateName.symbol.charAt(0);
+            return Character.toUpperCase(c0) == c0;
+        };
+    }
+
+    private static Predicate<CandidateName> isSecondCharacterInLowerCase(){
+        return candidateName -> {
+            char c1 = candidateName.symbol.charAt(1);
+            return Character.toLowerCase(c1) == c1;
+        };
+    }
+
     //responses
 
     public static final EvaluationResponse SYMBOL_LETTERS_NOT_IN_ORDER =
@@ -89,6 +99,11 @@ public class ChemicalNamingEvaluations {
             new EvaluationResponse(false, "If a letter occurs twice " +
                     "then the symbol must be that letter twice");
 
+    public static final EvaluationResponse FIRST_CHAR_OF_SYMBOL_NOT_UPPER_CASE =
+            new EvaluationResponse(false, "First symbol character must be upper case");
+
+    public static final EvaluationResponse SECOND_CHAR_OF_SYMBOL_NOT_LOWERCASE =
+            new EvaluationResponse(false, "Second symbol character must be lower case");
 
     static List<Function<CandidateName, EvaluationResponse>> evaluations(){
         return Arrays.asList(
@@ -96,7 +111,9 @@ public class ChemicalNamingEvaluations {
                 ChemicalNameEvaluation.create(areTheLettersInElementOrder(), VALID, SYMBOL_LETTERS_NOT_IN_ORDER),
                 ChemicalNameEvaluation.create(areBothSymbolLettersInTheElementName(), VALID, SYMBOL_LETTERS_ARE_MISSING_FROM_THE_NAME),
                 ChemicalNameEvaluation.create(doesSymbolContainTwoLetters(), VALID, SYMBOL_IS_NOT_TWO_LETTERS),
-                ChemicalNameEvaluation.create(areAllTheLettersFromElementName(), VALID, SYMBOL_LETTERS_NOT_ALL_FROM_CHEM_NAME)
+                ChemicalNameEvaluation.create(areAllTheLettersFromElementName(), VALID, SYMBOL_LETTERS_NOT_ALL_FROM_CHEM_NAME),
+                ChemicalNameEvaluation.create(isFirstCharacterInUpperCase(), VALID, FIRST_CHAR_OF_SYMBOL_NOT_UPPER_CASE),
+                ChemicalNameEvaluation.create(isSecondCharacterInLowerCase(), VALID, SECOND_CHAR_OF_SYMBOL_NOT_LOWERCASE)
         );
     }
 
