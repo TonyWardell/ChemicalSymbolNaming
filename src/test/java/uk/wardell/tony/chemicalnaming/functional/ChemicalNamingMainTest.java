@@ -40,12 +40,11 @@ public class ChemicalNamingMainTest {
 
     @org.junit.jupiter.api.Test
     void evaluateSymbol3() {
-        CandidateName candidateName = new CandidateName("Stantzon","Zt");
+        CandidateName candidateName = new CandidateName("Melintzum","M");
 
         Response response = main.evaluateSymbol(candidateName);
 
-        assertThat(response, is(SYMBOL_LETTERS_NOT_IN_ORDER));
-
+        assertThat(response, is(SYMBOL_IS_NOT_TWO_LETTERS));
     }
 
     @org.junit.jupiter.api.Test
@@ -59,7 +58,7 @@ public class ChemicalNamingMainTest {
 
     @org.junit.jupiter.api.Test
     void evaluateSymbol5() {
-        CandidateName candidateName = new CandidateName("Tullium","Ty");
+        CandidateName candidateName = new CandidateName("Tullium","uT");
 
         Response response = main.evaluateSymbol(candidateName);
 
