@@ -1,4 +1,4 @@
-package uk.wardell.tony.chemicalnaming.functional;
+package uk.wardell.tony.chemicalnaming;
 
 import lombok.Data;
 

@@ -1,12 +1,14 @@
 package uk.wardell.tony.chemicalnaming.terse;
 
 
+import uk.wardell.tony.chemicalnaming.CandidateName;
+
 public class CandidateNameEvaluatorStrategyTwo {
 
     NamingResult evaluate(CandidateName candidateName) {
 
-        String lcName = candidateName.name.toLowerCase();
-        String symbolLc = candidateName.symbol.toLowerCase();
+        String lcName = candidateName.getElement().toLowerCase();
+        String symbolLc = candidateName.getSymbol().toLowerCase();
 
         int j = lcName.indexOf(symbolLc.charAt(0));
         int k = lcName.lastIndexOf(symbolLc.charAt(1));

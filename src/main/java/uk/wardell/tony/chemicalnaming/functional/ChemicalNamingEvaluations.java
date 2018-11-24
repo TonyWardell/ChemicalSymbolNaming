@@ -1,5 +1,6 @@
 package uk.wardell.tony.chemicalnaming.functional;
 
+import uk.wardell.tony.chemicalnaming.CandidateName;
 import uk.wardell.tony.patterned.Evaluation;
 import uk.wardell.tony.patterned.SimpleEvaluation;
 import uk.wardell.tony.patterned.response.Response;

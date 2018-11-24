@@ -1,6 +1,7 @@
 package uk.wardell.tony.chemicalnaming.functional;
 
 import org.junit.Test;
+import uk.wardell.tony.chemicalnaming.CandidateName;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
