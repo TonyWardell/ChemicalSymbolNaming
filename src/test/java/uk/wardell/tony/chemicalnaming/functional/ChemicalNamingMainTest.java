@@ -7,9 +7,9 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static uk.wardell.tony.chemicalnaming.NamingEvaluationResponses.*;
 
-public class ChemicalNamingMainTest {
+class ChemicalNamingMainTest {
 
-    ChemicalNamingMain main = new ChemicalNamingMain();
+    private final ChemicalNamingMain main = new ChemicalNamingMain();
 
     @org.junit.jupiter.api.Test
     void evaluateSymbol0() {
