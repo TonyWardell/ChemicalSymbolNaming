@@ -36,7 +36,7 @@ public class NamingEvaluationResponses {
         FIRST_NOT_UPPER_CASE("First symbol character must be upper case"),
         SECOND_NOT_LOWERCASE("Second symbol character must be lower case");
 
-        private String description;
+        private final String description;
 
         ResponseValue(String s) {
             description = s;
@@ -46,4 +46,15 @@ public class NamingEvaluationResponses {
             return description;
         }
     }
+
+    /**
+     * A test for java 12 switch statements
+     */
+
+//    public boolean isWhat(ResponseValue responseValue){
+//        switch (responseValue) {
+//            case PASSED -> true;
+//            case NOT_TWO_LETTERS -> false;
+//        }
+//    };
 }
