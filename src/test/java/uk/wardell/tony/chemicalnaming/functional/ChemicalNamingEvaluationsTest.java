@@ -4,6 +4,7 @@ import org.junit.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
+import static uk.wardell.tony.chemicalnaming.functional.ChemicalNamingEvaluations.*;
 
 public class ChemicalNamingEvaluationsTest {
 
@@ -11,13 +12,13 @@ public class ChemicalNamingEvaluationsTest {
     public void doesSymbolContainTwoLettersIsTrue(){
         CandidateName candidateName = new CandidateName(null, "xn");
 
-        assertThat(ChemicalNamingEvaluations.doesSymbolContainTwoLetters().test(candidateName), is(true));
+        assertThat(doesSymbolContainTwoLetters().test(candidateName), is(true));
     }
 
     @Test
     public void doesSymbolContainTwoLettersIsFalse(){
         CandidateName candidateName = new CandidateName(null, "sss");
 
-        assertThat(ChemicalNamingEvaluations.doesSymbolContainTwoLetters().test(candidateName), is(false));
+        assertThat(doesSymbolContainTwoLetters().test(candidateName), is(false));
     }
 }
