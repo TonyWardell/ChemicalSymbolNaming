@@ -18,11 +18,8 @@ public class NamingEvaluationResponses {
     public static final Response SYMBOL_IS_NOT_TWO_LETTERS =
             new InvalidResponse(ResponseValue.NOT_TWO_LETTERS);
 
-    public static final Response SYMBOL_LETTERS_NOT_ALL_FROM_CHEM_NAME =
-            new InvalidResponse(ResponseValue.NOT_FROM_CHEM_NAME);
-
     public static final Response IF_LETTERS_IN_SYMBOL_ARE_THE_SAME_THEN_THE_NAME_SHOULD_HAVE_THOSE_LETTERS_TWICE =
-            new InvalidResponse(ResponseValue.MATCH_COUNT);
+            new InvalidResponse(ResponseValue.TWICE_CHECK_FAILED);
 
     public static final Response FIRST_CHAR_OF_SYMBOL_NOT_UPPER_CASE =
             new InvalidResponse(ResponseValue.FIRST_NOT_UPPER_CASE);
@@ -32,11 +29,10 @@ public class NamingEvaluationResponses {
 
     enum ResponseValue {
         PASSED("Symbol passes criteria"),
-        NOT_IN_ORDER("Symbol letters must be in same order as element"),
-        LETTERS_ARE_MISSING("Symbol letters are missing from the name"),
         NOT_TWO_LETTERS("Symbol Must Contain 2 Letters"),
-        NOT_FROM_CHEM_NAME("Symbol may only contain letters in element"),
-        MATCH_COUNT("If a letter occurs twice then the symbol must be that letter twice"),
+        LETTERS_ARE_MISSING("Symbol letters are missing from the name"),
+        TWICE_CHECK_FAILED("If a letter occurs twice then the symbol must be that letter twice"),
+        NOT_IN_ORDER("Symbol letters must be in same order as element"),
         FIRST_NOT_UPPER_CASE("First symbol character must be upper case"),
         SECOND_NOT_LOWERCASE("Second symbol character must be lower case");
 
