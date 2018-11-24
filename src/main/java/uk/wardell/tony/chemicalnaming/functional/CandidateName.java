@@ -1,8 +1,11 @@
 package uk.wardell.tony.chemicalnaming.functional;
 
+import lombok.Data;
+
+@Data
 public class CandidateName {
-    final String element;
-    final String symbol;
+    private final String element;
+    private final String symbol;
 
     public CandidateName(String name, String symbol) {
         this.element = name;
