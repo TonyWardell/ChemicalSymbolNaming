@@ -1,4 +1,4 @@
-package uk.wardell.tony.logic;
+package uk.wardell.tony.core.strategy.logic;
 
 import java.util.Optional;
 
