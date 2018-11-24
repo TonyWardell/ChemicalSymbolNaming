@@ -3,7 +3,7 @@ package uk.wardell.tony.chemicalnaming.terse;
 
 import uk.wardell.tony.chemicalnaming.CandidateName;
 
-public class CandidateNameEvaluator {
+class CandidateNameEvaluator {
 
 
     NamingResult evaluate(CandidateName candidateName) {
