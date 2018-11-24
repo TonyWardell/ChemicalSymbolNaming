@@ -15,8 +15,8 @@ import static uk.wardell.tony.chemicalnaming.NamingEvaluationResponses.*;
 
 class ChemicalNamingEvaluations {
 
-    static Function<CandidateName,String> firstChar = cn -> String.valueOf(cn.getSymbol().toLowerCase().charAt(0));
-    static Function<CandidateName,String> secondChar = cn -> String.valueOf(cn.getSymbol().toLowerCase().charAt(1));
+    private static final Function<CandidateName,String> firstChar = cn -> String.valueOf(cn.getSymbol().toLowerCase().charAt(0));
+    private static final Function<CandidateName,String> secondChar = cn -> String.valueOf(cn.getSymbol().toLowerCase().charAt(1));
 
 
     static Predicate<CandidateName> doesSymbolContainTwoLetters() {
@@ -25,35 +25,35 @@ class ChemicalNamingEvaluations {
 
     private static Predicate<CandidateName> charFrequencyInSymbolShouldMatchThatInElement() {
         return cn -> {
-            CharLocations charLocations = getCharLocations(cn);
+            var charLocations = getCharLocations(cn);
             return charLocations.loc0 != charLocations.loc1;
         };
     }
 
     private static Predicate<CandidateName> areBothSymbolLettersInTheElementName() {
         return cn -> {
-            CharLocations charLocations = getCharLocations(cn);
+            var charLocations = getCharLocations(cn);
             return charLocations.loc0 != -1 && charLocations.loc1 != -1;
         };
     }
 
     private static Predicate<CandidateName> areTheLettersInElementOrder() {
         return cn -> {
-            CharLocations charLocations = getCharLocations(cn);
+            var charLocations = getCharLocations(cn);
             return charLocations.loc0 < charLocations.loc1;
         };
     }
 
     private static Predicate<CandidateName> isFirstCharacterInUpperCase(){
-        return candidateName -> {
-            char c0 = candidateName.getSymbol().charAt(0);
+        return cn -> {
+            char c0 = cn.getSymbol().charAt(0);
             return Character.toUpperCase(c0) == c0;
         };
     }
 
     private static Predicate<CandidateName> isSecondCharacterInLowerCase(){
         return cn -> {
-            String c1 = String.valueOf(cn.getSymbol().charAt(1));
+            var c1 = String.valueOf(cn.getSymbol().charAt(1));
             return secondChar.apply(cn).equals(c1);
         };
     }
@@ -81,10 +81,10 @@ class ChemicalNamingEvaluations {
     }
 
     static class CharLocations {
-        int loc0;
-        int loc1;
+        final int loc0;
+        final int loc1;
 
-        public CharLocations(int loc0, int loc1) {
+        CharLocations(int loc0, int loc1) {
             this.loc0 = loc0;
             this.loc1 = loc1;
         }
