@@ -10,7 +10,7 @@ import static uk.wardell.tony.chemicalnaming.NamingEvaluationResponses.*;
 
 class ChemicalNamingMain {
 
-    List<Function<CandidateName, Response>> evaluations;
+    private final List<Function<CandidateName, Response>> evaluations;
 
     public ChemicalNamingMain() {
         evaluations = ChemicalNamingEvaluations.evaluations();
