@@ -6,7 +6,7 @@ import uk.wardell.tony.chemicalnaming.CandidateName;
 import uk.wardell.tony.chemicalnaming.terse.NamingResult;
 import uk.wardell.tony.core.strategy.logic.Finder;
 
-public class CandidateNameEvaluatorWithOptional {
+class CandidateNameEvaluatorWithOptional {
 
     NamingResult evaluate(CandidateName candidateName) {
 
