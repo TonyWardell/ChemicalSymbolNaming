@@ -11,9 +11,9 @@ import java.util.function.Predicate;
 
 import static uk.wardell.tony.chemicalnaming.NamingEvaluationResponses.*;
 
-public class ChemicalNamingEvaluations {
+class ChemicalNamingEvaluations {
 
-    public static Predicate<CandidateName> doesSymbolContainTwoLetters() {
+    static Predicate<CandidateName> doesSymbolContainTwoLetters() {
         return candidateName -> candidateName.getSymbol().length() == 2;
     }
 

@@ -46,5 +46,9 @@ public class NamingEvaluationResponses {
         ResponseValue(String s) {
             description = s;
         }
+
+        public String getDescription() {
+            return description;
+        }
     }
 }
