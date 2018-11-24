@@ -14,20 +14,22 @@ import static uk.wardell.tony.chemicalnaming.NamingEvaluationResponses.*;
 
 class ChemicalNamingEvaluations {
 
+    static Function<CandidateName,Character> firstChar = cn -> cn.getSymbol().toLowerCase().charAt(0);
+    static Function<CandidateName,Character> secondChar = cn -> cn.getSymbol().toLowerCase().charAt(1);
+
+
     static Predicate<CandidateName> doesSymbolContainTwoLetters() {
         return candidateName -> candidateName.getSymbol().length() == 2;
     }
 
     private static Predicate<CandidateName> ifSymbolNameIsTwoOfTheSameLetterThenNameShouldHaveThatLetterTwice() {
-        return candidateName -> {
-            char c0 = candidateName.getSymbol().charAt(0);
-            char c1 = candidateName.getSymbol().charAt(1);
-            char low0 = Character.toLowerCase(c0);
-            char low1 = Character.toLowerCase(c1);
+        return cn -> {
+            char low0 = firstChar.apply(cn);
+            char low1 = secondChar.apply(cn);
             if(low0 != low1) return true;
 
             //Characters are the same
-            String lower = candidateName.getElement().toLowerCase();
+            String lower = cn.getElement().toLowerCase();
             int loc0 = lower.indexOf(low0);
             int loc1 = lower.lastIndexOf(low1);
             return loc0 != loc1;
@@ -35,34 +37,27 @@ class ChemicalNamingEvaluations {
     }
 
     private static Predicate<CandidateName> areBothSymbolLettersInTheElementName() {
-        return candidateName -> {
-            char c1 = candidateName.getSymbol().toLowerCase().charAt(0);
-            char c2 = candidateName.getSymbol().toLowerCase().charAt(1);
-            return (candidateName.getElement().toLowerCase().contains("" + c1) && candidateName
-                    .getElement().toLowerCase().contains(("" + c2)));
-        };
+        return cn -> (cn.getElement().toLowerCase().contains("" + firstChar.apply(cn)) && cn
+                .getElement().toLowerCase().contains(("" + secondChar.apply(cn))));
     }
 
     private static Predicate<CandidateName> areTheLettersInElementOrder() {
-        return candidateName -> {
-            int firstCharacterLocation = candidateName.getElement().indexOf(candidateName.getSymbol().toLowerCase().charAt(0));
-            String restOfSequence = candidateName.getElement().substring(firstCharacterLocation + 1);
-
-            char secondCharOfSymbol = candidateName.getSymbol().toLowerCase().charAt(1);
-
-            return restOfSequence.contains("" + secondCharOfSymbol);
+        return cn -> {
+            int firstCharacterLocation = cn.getElement().indexOf(cn.getSymbol().toLowerCase().charAt(0));
+            String restOfSequence = cn.getElement().substring(firstCharacterLocation + 1);
+            return restOfSequence.contains("" + secondChar.apply(cn));
         };
     }
 
     private static Predicate<CandidateName> areAllTheLettersFromElementName() {
-        return candidateName -> {
-            int firstCharacterLocation = candidateName.getElement().indexOf(candidateName.getSymbol().charAt(0));
-            String restOfSequence = candidateName.getElement().substring(firstCharacterLocation + 1);
+        return cn -> {
+            int firstCharacterLocation = cn.getElement().indexOf(cn.getSymbol().charAt(0));
+            String restOfSequence = cn.getElement().substring(firstCharacterLocation + 1);
 
-            char secondCharOfSymbol = candidateName.getSymbol().charAt(1);
+            Character secondCharOfSymbol = secondChar.apply(cn);
 
             if (!restOfSequence.contains("" + secondCharOfSymbol)) {
-                return !candidateName.getElement().contains("" + secondCharOfSymbol);
+                return !cn.getElement().contains("" + secondCharOfSymbol);
             }
 
             return true;
