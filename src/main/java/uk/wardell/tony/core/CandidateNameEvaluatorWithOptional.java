@@ -1,10 +1,10 @@
-package uk.wardell.tony.core.strategy;
+package uk.wardell.tony.core;
 
 import java.util.Optional;
 
 import uk.wardell.tony.chemicalnaming.terse.CandidateName;
 import uk.wardell.tony.chemicalnaming.terse.NamingResult;
-import uk.wardell.tony.logic.Finder;
+import uk.wardell.tony.core.strategy.logic.Finder;
 
 public class CandidateNameEvaluatorWithOptional {
 
