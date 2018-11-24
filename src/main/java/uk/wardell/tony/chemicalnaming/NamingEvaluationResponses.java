@@ -30,7 +30,6 @@ public class NamingEvaluationResponses {
     public static final Response SECOND_CHAR_OF_SYMBOL_NOT_LOWERCASE =
             new InvalidResponse(ResponseValue.SECOND_NOT_LOWERCASE);
 
-
     enum ResponseValue {
         PASSED("Symbol passes criteria"),
         NOT_IN_ORDER("Symbol letters must be in same order as element"),
