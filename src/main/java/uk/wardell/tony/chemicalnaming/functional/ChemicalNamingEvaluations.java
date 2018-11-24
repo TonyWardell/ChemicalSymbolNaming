@@ -11,8 +11,7 @@ import static uk.wardell.tony.patterned.EvaluationResponse.VALID;
 
 public class ChemicalNamingEvaluations {
 
-    //tests
-    static final Predicate<CandidateName> doesSymbolContainTwoLetters() {
+    private static Predicate<CandidateName> doesSymbolContainTwoLetters() {
         return candidateName -> candidateName.symbol.length() == 2;
     }
 
