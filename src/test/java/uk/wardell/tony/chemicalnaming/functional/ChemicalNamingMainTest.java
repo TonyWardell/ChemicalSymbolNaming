@@ -1,11 +1,11 @@
 package uk.wardell.tony.chemicalnaming.functional;
 
-import uk.wardell.tony.chemicalnaming.CandidateName;
+import uk.wardell.tony.chemicalnaming.model.CandidateName;
 import uk.wardell.tony.patterned.response.Response;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
-import static uk.wardell.tony.chemicalnaming.NamingEvaluationResponses.*;
+import static uk.wardell.tony.chemicalnaming.model.NamingEvaluationResponses.*;
 
 class ChemicalNamingMainTest {
 
