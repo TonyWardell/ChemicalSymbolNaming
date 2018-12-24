@@ -61,7 +61,6 @@ class Evaluations {
 
     private List<Function<CandidateName, Response>> evaluations(){
         Evaluation<CandidateName, Response> requireTrue = new EvaluateSuccess<>();
-        Evaluation<CandidateName, Response> requireFalse = new EvaluateFailure<>();
 
         return Arrays.asList(
                 requireTrue.create(doesSymbolContainTwoLetters(), VALID, SYMBOL_IS_NOT_TWO_LETTERS),

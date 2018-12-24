@@ -9,7 +9,8 @@ import uk.wardell.tony.chemicalnaming.model.CandidateName;
 class MainEvaluateUsingEclipseCollections {
 
     private MutableList<CandidateName> candidateNames;
-    private Predicate<CandidateName> candidateNamePredicate = name -> Evaluations.checkValidity(name).isValid();
+    private Evaluations evaluations = new Evaluations();
+    private Predicate<CandidateName> candidateNamePredicate = name -> evaluations.checkValidity(name).isValid();
 
     public static void main(String[] args) {
         MainEvaluateUsingEclipseCollections mainEvaluateList = new MainEvaluateUsingEclipseCollections();
