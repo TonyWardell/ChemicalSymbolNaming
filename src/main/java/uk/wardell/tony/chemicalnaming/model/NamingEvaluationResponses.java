@@ -1,10 +1,10 @@
-package uk.wardell.tony.chemicalnaming;
+package uk.wardell.tony.chemicalnaming.model;
 
 import uk.wardell.tony.patterned.response.InvalidResponse;
 import uk.wardell.tony.patterned.response.Response;
 import uk.wardell.tony.patterned.response.ValidResponse;
 
-import static uk.wardell.tony.chemicalnaming.NamingEvaluationResponses.ResponseValue.PASSED;
+import static uk.wardell.tony.chemicalnaming.model.NamingEvaluationResponses.ResponseValue.PASSED;
 
 public class NamingEvaluationResponses {
 
@@ -42,19 +42,9 @@ public class NamingEvaluationResponses {
             description = s;
         }
 
-        public String getDescription() {
-            return description;
-        }
     }
 
     /**
      * A test for java 12 switch statements
      */
-
-//    public boolean isWhat(ResponseValue responseValue){
-//        switch (responseValue) {
-//            case PASSED -> true;
-//            case NOT_TWO_LETTERS -> false;
-//        }
-//    };
 }
