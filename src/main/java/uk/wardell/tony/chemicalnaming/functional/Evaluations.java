@@ -1,6 +1,6 @@
 package uk.wardell.tony.chemicalnaming.functional;
 
-import uk.wardell.tony.chemicalnaming.CandidateName;
+import uk.wardell.tony.chemicalnaming.model.CandidateName;
 import uk.wardell.tony.patterned.Evaluation;
 import uk.wardell.tony.patterned.EvaluateSuccess;
 import uk.wardell.tony.patterned.EvaluateFailure;
@@ -11,9 +11,9 @@ import java.util.List;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
-import static uk.wardell.tony.chemicalnaming.NamingEvaluationResponses.*;
+import static uk.wardell.tony.chemicalnaming.model.NamingEvaluationResponses.*;
 
-class ChemicalNamingEvaluations {
+class Evaluations {
 
     private static final Function<CandidateName,String> firstChar = cn -> String.valueOf(cn.getSymbol().toLowerCase().charAt(0));
     private static final Function<CandidateName,String> secondChar = cn -> String.valueOf(cn.getSymbol().toLowerCase().charAt(1));
@@ -71,6 +71,15 @@ class ChemicalNamingEvaluations {
                 requireTrue.create(isFirstCharacterInUpperCase(), VALID, FIRST_CHAR_OF_SYMBOL_NOT_UPPER_CASE),
                 requireTrue.create(isSecondCharacterInLowerCase(), VALID, SECOND_CHAR_OF_SYMBOL_NOT_LOWERCASE)
         );
+    }
+
+
+    static Response checkValidity(CandidateName candidateName){
+        return evaluations().stream()
+                .map(eval -> eval.apply(candidateName))
+                .filter(resp -> !resp.isValid())
+                .findFirst()
+                .orElse(VALID);
     }
 
     private static CharLocations getCharLocations(CandidateName cn) {
