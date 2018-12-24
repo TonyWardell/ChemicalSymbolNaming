@@ -19,39 +19,39 @@ class Evaluations {
     private static final Function<CandidateName,String> secondChar = cn -> String.valueOf(cn.getSymbol().toLowerCase().charAt(1));
 
 
-    static Predicate<CandidateName> doesSymbolContainTwoLetters() {
+    private static Predicate<CandidateName> doesSymbolContainTwoLetters() {
         return cn -> cn.getSymbol().length() == 2;
     }
 
-    private static Predicate<CandidateName> charFrequencyInSymbolShouldMatchThatInElement() {
+    private Predicate<CandidateName> charFrequencyInSymbolShouldMatchThatInElement() {
         return cn -> {
             var charLocations = getCharLocations(cn);
             return charLocations.loc0 != charLocations.loc1;
         };
     }
 
-    private static Predicate<CandidateName> areBothSymbolLettersInTheElementName() {
+    private Predicate<CandidateName> areBothSymbolLettersInTheElementName() {
         return cn -> {
             var charLocations = getCharLocations(cn);
             return charLocations.loc0 != -1 && charLocations.loc1 != -1;
         };
     }
 
-    private static Predicate<CandidateName> areTheLettersInElementOrder() {
+    private Predicate<CandidateName> areTheLettersInElementOrder() {
         return cn -> {
             var charLocations = getCharLocations(cn);
             return charLocations.loc0 < charLocations.loc1;
         };
     }
 
-    private static Predicate<CandidateName> isFirstCharacterInUpperCase(){
+    private Predicate<CandidateName> isFirstCharacterInUpperCase(){
         return cn -> {
             char c0 = cn.getSymbol().charAt(0);
             return Character.toUpperCase(c0) == c0;
         };
     }
 
-    private static Predicate<CandidateName> isSecondCharacterInLowerCase(){
+    private Predicate<CandidateName> isSecondCharacterInLowerCase(){
         return cn -> {
             var c1 = String.valueOf(cn.getSymbol().charAt(1));
             return secondChar.apply(cn).equals(c1);
@@ -59,7 +59,7 @@ class Evaluations {
     }
 
 
-    static List<Function<CandidateName, Response>> evaluations(){
+    private List<Function<CandidateName, Response>> evaluations(){
         Evaluation<CandidateName, Response> requireTrue = new EvaluateSuccess<>();
         Evaluation<CandidateName, Response> requireFalse = new EvaluateFailure<>();
 
@@ -74,7 +74,7 @@ class Evaluations {
     }
 
 
-    static Response checkValidity(CandidateName candidateName){
+    Response checkValidity(CandidateName candidateName){
         return evaluations().stream()
                 .map(eval -> eval.apply(candidateName))
                 .filter(resp -> !resp.isValid())
