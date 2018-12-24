@@ -1,7 +1,7 @@
 package uk.wardell.tony.chemicalnaming.terse;
 
 
-import uk.wardell.tony.chemicalnaming.CandidateName;
+import uk.wardell.tony.chemicalnaming.model.CandidateName;
 
 class CandidateNameEvaluator {
 
