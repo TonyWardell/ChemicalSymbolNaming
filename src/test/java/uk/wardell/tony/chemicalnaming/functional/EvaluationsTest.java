@@ -1,13 +1,13 @@
 package uk.wardell.tony.chemicalnaming.functional;
 
 import org.junit.Test;
-import uk.wardell.tony.chemicalnaming.CandidateName;
+import uk.wardell.tony.chemicalnaming.model.CandidateName;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
-import static uk.wardell.tony.chemicalnaming.functional.ChemicalNamingEvaluations.*;
+import static uk.wardell.tony.chemicalnaming.functional.Evaluations.*;
 
-public class ChemicalNamingEvaluationsTest {
+public class EvaluationsTest {
 
     @Test
     public void doesSymbolContainTwoLettersIsTrue(){
