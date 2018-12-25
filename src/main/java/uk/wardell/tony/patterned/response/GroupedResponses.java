@@ -5,6 +5,7 @@ import uk.wardell.tony.core.Evaluator;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 @Data
 public class GroupedResponses<T> {
@@ -12,7 +13,7 @@ public class GroupedResponses<T> {
     Collection<CandidateAndResponse> passed;
     Collection<CandidateAndResponse> failed;
 
-    public GroupedResponses(Collection<CandidateAndResponse> passed, Collection<CandidateAndResponse> failed) {
+    private GroupedResponses(Collection<CandidateAndResponse> passed, Collection<CandidateAndResponse> failed) {
         this.passed = passed;
         this.failed = failed;
     }
@@ -27,11 +28,11 @@ public class GroupedResponses<T> {
         Response response = evaluator.checkValidity(target);
         CandidateAndResponse candidateAndResponse = new CandidateAndResponse<>(target, response);
         if (response.isValid()) {
-            ArrayList addToPassed = new ArrayList(passed);
+            List<CandidateAndResponse> addToPassed = new ArrayList<>(passed);
             addToPassed.add(candidateAndResponse);
             return new GroupedResponses(addToPassed, failed);
         }
-        ArrayList addToFailed = new ArrayList(failed);
+        List<CandidateAndResponse> addToFailed = new ArrayList<>(failed);
         return new GroupedResponses(passed, addToFailed);
     }
 

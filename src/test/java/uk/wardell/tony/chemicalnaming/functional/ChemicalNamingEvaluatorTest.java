@@ -9,7 +9,7 @@ import static uk.wardell.tony.chemicalnaming.model.NamingEvaluationResponses.*;
 
 class ChemicalNamingEvaluatorTest {
 
-     ChemicalNamingEvaluator chemicalNamingEvaluator = new ChemicalNamingEvaluator();
+     private final ChemicalNamingEvaluator chemicalNamingEvaluator = new ChemicalNamingEvaluator();
 
     @org.junit.jupiter.api.Test
     void evaluateSymbol0() {

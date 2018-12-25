@@ -5,17 +5,15 @@ import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.partition.list.PartitionMutableList;
 import org.eclipse.collections.impl.factory.Lists;
 import uk.wardell.tony.chemicalnaming.model.CandidateName;
-import uk.wardell.tony.patterned.response.GroupedResponses;
 import uk.wardell.tony.patterned.response.Response;
 
-import java.util.Collections;
 import java.util.function.Function;
 
 class MainEvaluateUsingEclipseCollections {
 
     private MutableList<CandidateName> candidateNames;
-    private ChemicalNamingEvaluator chemicalNamingEvaluator = new ChemicalNamingEvaluator();
-    private Predicate<CandidateName> candidateNamePredicate = name -> chemicalNamingEvaluator.checkValidity(name).isValid();
+    private final ChemicalNamingEvaluator chemicalNamingEvaluator = new ChemicalNamingEvaluator();
+    private final Predicate<CandidateName> candidateNamePredicate = name -> chemicalNamingEvaluator.checkValidity(name).isValid();
     private Function<CandidateName, Response> responseFromValidation =  name -> chemicalNamingEvaluator.checkValidity(name);
 
     public static void main(String[] args) {
