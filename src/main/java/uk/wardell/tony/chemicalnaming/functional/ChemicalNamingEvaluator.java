@@ -1,9 +1,9 @@
 package uk.wardell.tony.chemicalnaming.functional;
 
 import uk.wardell.tony.chemicalnaming.model.CandidateName;
+import uk.wardell.tony.core.Evaluator;
 import uk.wardell.tony.patterned.Evaluation;
 import uk.wardell.tony.patterned.EvaluateSuccess;
-import uk.wardell.tony.patterned.EvaluateFailure;
 import uk.wardell.tony.patterned.response.Response;
 
 import java.util.Arrays;
@@ -13,11 +13,18 @@ import java.util.function.Predicate;
 
 import static uk.wardell.tony.chemicalnaming.model.NamingEvaluationResponses.*;
 
-class Evaluations {
+class ChemicalNamingEvaluator implements Evaluator<CandidateName> {
 
-    private static final Function<CandidateName,String> firstChar = cn -> String.valueOf(cn.getSymbol().toLowerCase().charAt(0));
-    private static final Function<CandidateName,String> secondChar = cn -> String.valueOf(cn.getSymbol().toLowerCase().charAt(1));
+    static private final Function<CandidateName, String> firstChar = cn -> String.valueOf(cn.getSymbol().toLowerCase().charAt(0));
+    static private final Function<CandidateName, String> secondChar = cn -> String.valueOf(cn.getSymbol().toLowerCase().charAt(1));
 
+    public Response checkValidity(CandidateName candidateName) {
+        return evaluations().stream()
+                .map(eval -> eval.apply(candidateName))
+                .filter(resp -> !resp.isValid())
+                .findFirst()
+                .orElse(VALID);
+    }
 
     private static Predicate<CandidateName> doesSymbolContainTwoLetters() {
         return cn -> cn.getSymbol().length() == 2;
@@ -44,14 +51,14 @@ class Evaluations {
         };
     }
 
-    private Predicate<CandidateName> isFirstCharacterInUpperCase(){
+    private Predicate<CandidateName> isFirstCharacterInUpperCase() {
         return cn -> {
             char c0 = cn.getSymbol().charAt(0);
             return Character.toUpperCase(c0) == c0;
         };
     }
 
-    private Predicate<CandidateName> isSecondCharacterInLowerCase(){
+    private Predicate<CandidateName> isSecondCharacterInLowerCase() {
         return cn -> {
             var c1 = String.valueOf(cn.getSymbol().charAt(1));
             return secondChar.apply(cn).equals(c1);
@@ -59,7 +66,7 @@ class Evaluations {
     }
 
 
-    private List<Function<CandidateName, Response>> evaluations(){
+    private List<Function<CandidateName, Response>> evaluations() {
         Evaluation<CandidateName, Response> requireTrue = new EvaluateSuccess<>();
 
         return Arrays.asList(
@@ -70,15 +77,6 @@ class Evaluations {
                 requireTrue.create(isFirstCharacterInUpperCase(), VALID, FIRST_CHAR_OF_SYMBOL_NOT_UPPER_CASE),
                 requireTrue.create(isSecondCharacterInLowerCase(), VALID, SECOND_CHAR_OF_SYMBOL_NOT_LOWERCASE)
         );
-    }
-
-
-    Response checkValidity(CandidateName candidateName){
-        return evaluations().stream()
-                .map(eval -> eval.apply(candidateName))
-                .filter(resp -> !resp.isValid())
-                .findFirst()
-                .orElse(VALID);
     }
 
     private static CharLocations getCharLocations(CandidateName cn) {
