@@ -5,12 +5,18 @@ import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.partition.list.PartitionMutableList;
 import org.eclipse.collections.impl.factory.Lists;
 import uk.wardell.tony.chemicalnaming.model.CandidateName;
+import uk.wardell.tony.patterned.response.GroupedResponses;
+import uk.wardell.tony.patterned.response.Response;
+
+import java.util.Collections;
+import java.util.function.Function;
 
 class MainEvaluateUsingEclipseCollections {
 
     private MutableList<CandidateName> candidateNames;
-    private Evaluations evaluations = new Evaluations();
-    private Predicate<CandidateName> candidateNamePredicate = name -> evaluations.checkValidity(name).isValid();
+    private ChemicalNamingEvaluator chemicalNamingEvaluator = new ChemicalNamingEvaluator();
+    private Predicate<CandidateName> candidateNamePredicate = name -> chemicalNamingEvaluator.checkValidity(name).isValid();
+    private Function<CandidateName, Response> responseFromValidation =  name -> chemicalNamingEvaluator.checkValidity(name);
 
     public static void main(String[] args) {
         MainEvaluateUsingEclipseCollections mainEvaluateList = new MainEvaluateUsingEclipseCollections();
@@ -18,6 +24,7 @@ class MainEvaluateUsingEclipseCollections {
 
         mainEvaluateList.printValidSizeWithSelect();
         mainEvaluateList.printBothSizesWithPartition();
+        mainEvaluateList.printResponsesFromValidation();
     }
 
     private void printValidSizeWithSelect() {
@@ -31,6 +38,12 @@ class MainEvaluateUsingEclipseCollections {
         System.out.println("Invalid names size is " + partitionedNames.getRejected().size());
 
     }
+
+    private void printResponsesFromValidation() {
+        MutableList<Response> responses = candidateNames.collectWith((each, responseFromValidation) -> chemicalNamingEvaluator.checkValidity(each), null);
+        System.out.println("Responses are " + responses.makeString());
+    }
+
 
     private MutableList<CandidateName> getCandidateNames() {
         //Valid
