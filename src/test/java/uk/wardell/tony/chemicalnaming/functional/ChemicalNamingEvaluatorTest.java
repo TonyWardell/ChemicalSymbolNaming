@@ -7,15 +7,15 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static uk.wardell.tony.chemicalnaming.model.NamingEvaluationResponses.*;
 
-class EvaluationsTest {
+class ChemicalNamingEvaluatorTest {
 
-     Evaluations evaluations = new Evaluations();
+     ChemicalNamingEvaluator chemicalNamingEvaluator = new ChemicalNamingEvaluator();
 
     @org.junit.jupiter.api.Test
     void evaluateSymbol0() {
         CandidateName candidateName = new CandidateName("Spenglerium","Ee");
 
-        Response response = evaluations.checkValidity(candidateName);
+        Response response = chemicalNamingEvaluator.checkValidity(candidateName);
 
         assertThat(response, is(VALID));
     }
@@ -24,7 +24,7 @@ class EvaluationsTest {
     void evaluateSymbol1() {
         CandidateName candidateName = new CandidateName("Zeddemorium","Zr");
 
-        Response response = evaluations.checkValidity(candidateName);
+        Response response = chemicalNamingEvaluator.checkValidity(candidateName);
 
         assertThat(response, is(VALID));    }
 
@@ -32,7 +32,7 @@ class EvaluationsTest {
     void evaluateSymbol2() {
         CandidateName candidateName = new CandidateName("Venkmine","Kn");
 
-        Response response = evaluations.checkValidity(candidateName);
+        Response response = chemicalNamingEvaluator.checkValidity(candidateName);
 
         assertThat(response, is(VALID));
 
@@ -42,7 +42,7 @@ class EvaluationsTest {
     void evaluateSymbol3() {
         CandidateName candidateName = new CandidateName("Melintzum","M");
 
-        Response response = evaluations.checkValidity(candidateName);
+        Response response = chemicalNamingEvaluator.checkValidity(candidateName);
 
         assertThat(response, is(SYMBOL_IS_NOT_TWO_LETTERS));
     }
@@ -51,7 +51,7 @@ class EvaluationsTest {
     void evaluateSymbol4() {
         CandidateName candidateName = new CandidateName("Melintzum","Nn");
 
-        Response response = evaluations.checkValidity(candidateName);
+        Response response = chemicalNamingEvaluator.checkValidity(candidateName);
 
         assertThat(response, is(IF_LETTERS_IN_SYMBOL_ARE_THE_SAME_THEN_THE_NAME_SHOULD_HAVE_THOSE_LETTERS_TWICE));
     }
@@ -60,7 +60,7 @@ class EvaluationsTest {
     void evaluateSymbol5() {
         CandidateName candidateName = new CandidateName("Tullium","uT");
 
-        Response response = evaluations.checkValidity(candidateName);
+        Response response = chemicalNamingEvaluator.checkValidity(candidateName);
 
         assertThat(response, is(SYMBOL_LETTERS_NOT_IN_ORDER));
     }
@@ -69,7 +69,7 @@ class EvaluationsTest {
     void evaluateSymbol6() {
         CandidateName candidateName = new CandidateName("Tullium","tu");
 
-        Response response = evaluations.checkValidity(candidateName);
+        Response response = chemicalNamingEvaluator.checkValidity(candidateName);
 
         assertThat(response, is(FIRST_CHAR_OF_SYMBOL_NOT_UPPER_CASE));
     }
@@ -78,7 +78,7 @@ class EvaluationsTest {
     void evaluateSymbol7() {
         CandidateName candidateName = new CandidateName("Tullium","TU");
 
-        Response response = evaluations.checkValidity(candidateName);
+        Response response = chemicalNamingEvaluator.checkValidity(candidateName);
 
         assertThat(response, is(SECOND_CHAR_OF_SYMBOL_NOT_LOWERCASE));
     }
