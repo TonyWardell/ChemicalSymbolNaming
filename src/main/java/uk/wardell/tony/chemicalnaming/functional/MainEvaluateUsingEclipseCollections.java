@@ -7,14 +7,11 @@ import org.eclipse.collections.impl.factory.Lists;
 import uk.wardell.tony.chemicalnaming.model.CandidateName;
 import uk.wardell.tony.patterned.response.Response;
 
-import java.util.function.Function;
-
 class MainEvaluateUsingEclipseCollections {
 
     private MutableList<CandidateName> candidateNames;
     private final ChemicalNamingEvaluator chemicalNamingEvaluator = new ChemicalNamingEvaluator();
     private final Predicate<CandidateName> candidateNamePredicate = name -> chemicalNamingEvaluator.checkValidity(name).isValid();
-    private Function<CandidateName, Response> responseFromValidation =  name -> chemicalNamingEvaluator.checkValidity(name);
 
     public static void main(String[] args) {
         MainEvaluateUsingEclipseCollections mainEvaluateList = new MainEvaluateUsingEclipseCollections();
